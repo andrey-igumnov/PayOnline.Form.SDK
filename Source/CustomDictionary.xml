@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Dictionary>
+  <Words>
+    <Recognized>
+      <Word>Qiwi</Word>
+      <Word>Yandex</Word>
+    </Recognized>
+    <Compound>
+      <Term CompoundAlternate="Paymaster">PayMaster</Term>
+    </Compound>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>SDK</Acronym>
+    </CasingExceptions>
+  </Acronyms>
+</Dictionary>
