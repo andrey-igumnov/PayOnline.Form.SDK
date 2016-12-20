@@ -1,9 +1,32 @@
 ## PayOnline.Form.SDK
 Simple payment URL generator for PayOnline IPSP
 
-## Description
+## Example
+```cs
+var uri = new PaymentUri(
+    processingUri: new Uri("https://secure.payonlinesystem.com"),
+    merchantSettings: new MerchantSettings(
+        merchantId: 12345,
+        key: "3844908d-4c2a-42e1-9be0-91bb5d068d22"),
+    orderInfo: new OrderInfo(
+        orderId: "56789",
+        amount: 9.99m,
+        currency: "USD",
+        orderDescription: "Buying phone",
+        validUntil: new DateTime(2010, 01, 29, 16, 10, 00)),
+    paymentMethod: PaymentMethod.Select,
+    language: Language.English,
+    redirectParameters: new RedirectParameters(
+        returnUrl: new Uri("http://merchant-site/return"),
+        failUrl: new Uri("http://merchant-site/fail")),
+    customData: new NameValueCollection { { "email", "test@test.test" } });
+```
+Result
+```
+https://secure.payonlinesystem.com/en/payment/select?MerchantId=12345&OrderId=56789&Amount=9.99&Currency=USD&ValidUntil=2010-01-29+16%3a10%3a00&OrderDescription=Buying+phone&SecurityKey=3a561b5b42069b2432095e08630c3f93&ReturnUrl=http%3a%2f%2fmerchant-site%2freturn&FailUrl=http%3a%2f%2fmerchant-site%2ffail&email=test%40test.test
+```
 
-## Usage
+## Description
 ### PaymentUri
 PayOnline form payment URL could be initialized in PaymentUri constructor
 ```cs
