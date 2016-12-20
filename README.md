@@ -1,3 +1,5 @@
+![Build status](https://ci.appveyor.com/api/projects/status/github/andrey-igumnov/PayOnline.Form.SDK?branch=master&svg=true&passingText=build%20-%20OK)
+
 ## PayOnline.Form.SDK
 Simple payment URL generator for PayOnline IPSP
 
