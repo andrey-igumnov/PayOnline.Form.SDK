@@ -32,7 +32,7 @@ namespace PayOnline.Form.SDK.Test
 
             Assert.AreEqual(
                 "https://secure.payonlinesystem.com/en/payment/select?MerchantId=12345&OrderId=56789&Amount=9.99&Currency=USD&ValidUntil=2010-01-29+16%3a10%3a00&OrderDescription=Buying+phone&SecurityKey=3a561b5b42069b2432095e08630c3f93&ReturnUrl=http%3a%2f%2fmerchant-site%2freturn&FailUrl=http%3a%2f%2fmerchant-site%2ffail&email=test%40test.test",
-                uri.ToString());
+                uri.AbsoluteUri);
         }
     }
 }
