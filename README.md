@@ -1,4 +1,5 @@
 ![Build status](https://ci.appveyor.com/api/projects/status/github/andrey-igumnov/PayOnline.Form.SDK?branch=master&svg=true&passingText=build%20-%20OK)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## PayOnline.Form.SDK
 Simple payment URL generator and callback query parser for PayOnline IPSP
