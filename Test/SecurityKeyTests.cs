@@ -15,10 +15,25 @@ namespace PayOnline.Form.SDK.Test
     public static class SecurityKeyTests
     {
         /// <summary>
-        /// Calculate key test
+        /// Calculate key for callback test
         /// </summary>
-        [Test(Description = "Calculate key")]
-        public static void CalculateKeyTest()
+        [Test(Description = "Calculate key for callback")]
+        public static void CalculateKeyForCallbackTest()
+        {
+            var key = new SecurityKey(
+                new MerchantSettings(12345, "3844908d-4c2a-42e1-9be0-91bb5d068d22"),
+                new OrderInfo("56789", 9.99m, "USD"),
+                123456789,
+                new DateTime(2010, 01, 01, 00, 00, 00));
+
+            Assert.AreEqual("9caebdeb8382cece06fd404661bf583b", key.Value);
+        }
+
+        /// <summary>
+        /// Calculate key for payment request test
+        /// </summary>
+        [Test(Description = "Calculate key for payment request")]
+        public static void CalculateKeyForPaymentRequestTest()
         {
             var key = new SecurityKey(
                 new MerchantSettings(12345, "3844908d-4c2a-42e1-9be0-91bb5d068d22"),

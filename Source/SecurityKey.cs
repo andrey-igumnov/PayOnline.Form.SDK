@@ -36,6 +36,28 @@ namespace PayOnline.Form.SDK
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="SecurityKey"/> class
+        /// </summary>
+        /// <param name="merchantSettings">Merchant settings</param>
+        /// <param name="orderInfo">Order information</param>
+        /// <param name="transactionId">Transaction unique identifier</param>
+        /// <param name="transactionDateTime">Transaction date time</param>
+        internal SecurityKey(MerchantSettings merchantSettings, OrderInfo orderInfo, int transactionId, DateTime transactionDateTime)
+        {
+            if (merchantSettings == null)
+            {
+                throw new ArgumentNullException(nameof(merchantSettings));
+            }
+
+            if (orderInfo == null)
+            {
+                throw new ArgumentNullException(nameof(orderInfo));
+            }
+
+            this.Value = CalculateKey(merchantSettings, orderInfo, transactionId, transactionDateTime);
+        }
+
+        /// <summary>
         /// Gets security key
         /// </summary>
         internal string Value { get; }
@@ -48,7 +70,7 @@ namespace PayOnline.Form.SDK
         /// <returns>Security key</returns>
         private static string CalculateKey(MerchantSettings merchantSettings, OrderInfo orderInfo)
         {
-            var merhantIdChunk = FormattableString.Invariant($"MerchantId={merchantSettings.MerchantId}");
+            var merchantIdChunk = FormattableString.Invariant($"MerchantId={merchantSettings.MerchantId}");
 
             var orderIdChunk = FormattableString.Invariant($"&OrderId={orderInfo.OrderId}");
 
@@ -66,7 +88,32 @@ namespace PayOnline.Form.SDK
 
             var keyChunk = FormattableString.Invariant($"&PrivateSecurityKey={merchantSettings.Key}");
 
-            return CalculateMd5Hash(FormattableString.Invariant($"{merhantIdChunk}{orderIdChunk}{amountChunk}{currencyChunk}{validUtilChunk}{orderDescriptionChunk}{keyChunk}"));
+            return CalculateMd5Hash(FormattableString.Invariant($"{merchantIdChunk}{orderIdChunk}{amountChunk}{currencyChunk}{validUtilChunk}{orderDescriptionChunk}{keyChunk}"));
+        }
+
+        /// <summary>
+        /// Calculates security key
+        /// </summary>
+        /// <param name="merchantSettings">Merchant settings</param>
+        /// <param name="orderInfo">Order information</param>
+        /// <param name="transactionId">Transaction unique identifier</param>
+        /// <param name="transactionDateTime">Transaction date time</param>
+        /// <returns>Security key</returns>
+        private static string CalculateKey(MerchantSettings merchantSettings, OrderInfo orderInfo, int transactionId, DateTime transactionDateTime)
+        {
+            var datetimeChunk = FormattableString.Invariant($"DateTime={transactionDateTime.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture)}");
+
+            var transactiondIdChunk = FormattableString.Invariant($"&TransactionID={transactionId}");
+
+            var orderIdChunk = FormattableString.Invariant($"&OrderId={orderInfo.OrderId}");
+
+            var amountChunk = FormattableString.Invariant($"&Amount={orderInfo.Amount.ToString("#.00", CultureInfo.InvariantCulture)}");
+
+            var currencyChunk = FormattableString.Invariant($"&Currency={orderInfo.Currency.ToUpperInvariant()}");
+
+            var keyChunk = FormattableString.Invariant($"&PrivateSecurityKey={merchantSettings.Key}");
+
+            return CalculateMd5Hash(FormattableString.Invariant($"{datetimeChunk}{transactiondIdChunk}{orderIdChunk}{amountChunk}{currencyChunk}{keyChunk}"));
         }
 
         /// <summary>
