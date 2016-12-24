@@ -1,8 +1,10 @@
 ![Build status](https://ci.appveyor.com/api/projects/status/github/andrey-igumnov/PayOnline.Form.SDK?branch=master&svg=true&passingText=build%20-%20OK)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## PayOnline.Form.SDK
-Simple payment URL generator for PayOnline IPSP
+Simple payment URL generator and callback query parser for PayOnline IPSP
 
+## Payment Url Generator
 ## Example
 ```cs
 var uri = new PaymentUri(
@@ -122,6 +124,20 @@ Parameter | Type | Description | Default value
 returnUrl | System.Uri | Absolute URL address that will be sent to the payer after completion of payment | null
 failUrl | System.Uri | Absolute URL address that will be sent to the payer, in case it is impossible to make a payment | null
 
+## Query parser
+## Example
+```cs
+const string Query = "DateTime=2016-12-31+23%3a59%3a59&TransactionID=1234567890&OrderId=0987654321qwe" +
+                     "&Amount=123.45&Currency=EUR&SecurityKey=036c0215b7197e33308c2a2cf219fbbf" +
+                     "&RebillAnchor=4587fh8fhYTF5ftfytf%3d&PaymentAmount=123.45" +
+                     "&PaymentCurrency=EUR&CardHolder=TEST+CARDHOLDER&CardNumber=411111******1111" +
+                     "&Country=US&City=New-York&ECI=7&Code=5205&ErrorCode=3&Zip=12700&Address=Test" +
+                     "&Phone=555-444-11-44&Email=test@cardholder.com&BankName=Chase&ThreedsEnrollment=0" +
+                     "&IpCountry=RU&BinCountry=US&AuthCode=666555&GatewayTransactionId=BankTrId1" +
+                     "&IpAddress=127.0.0.1&SpecialConditions=Validation+Required";
+var callbackData = new CallbackData(HttpUtility.ParseQueryString(Query), new MerchantSettings(12345, "3844908d-4c2a-42e1-9be0-91bb5d068d22"));
+
+```
 
 ## Contributing
 

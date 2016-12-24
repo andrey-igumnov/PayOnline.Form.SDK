@@ -36,6 +36,7 @@
     <DocumentationFile>bin\Release\PayOnline.Form.SDK.xml</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -50,6 +51,9 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallbackData.cs" />
+    <Compile Include="CardEnrollmentStatus.cs" />
+    <Compile Include="EcommerceIndicator.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="MerchantSettings.cs" />
     <Compile Include="OrderInfo.cs" />

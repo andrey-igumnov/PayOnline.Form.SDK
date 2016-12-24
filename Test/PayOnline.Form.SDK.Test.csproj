@@ -45,8 +45,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallbackDataTests.cs" />
     <Compile Include="PaymentUriTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityKeyTests.cs" />

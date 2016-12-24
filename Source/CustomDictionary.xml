@@ -4,6 +4,7 @@
     <Recognized>
       <Word>Qiwi</Word>
       <Word>Yandex</Word>
+      <Word>threeds</Word>
     </Recognized>
     <Compound>
       <Term CompoundAlternate="Paymaster">PayMaster</Term>
